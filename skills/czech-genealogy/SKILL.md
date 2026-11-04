@@ -1,6 +1,7 @@
 ---
 name: czech-genealogy
 description: Genealogický výzkum v českých a slovenských pramenech a údržba rodokmenu v Gramps. Použij, když uživatel hledá předky, sestavuje rodokmen, potřebuje žádost na matriku (doslovný výpis), hledá v digitalizovaných matrikách (eBadatelna SOA Praha, SOA Třeboň, Porta fontium, ARON, Litoměřice, Opava), čte matriční zápis, legionářskou kartu VÚA nebo upravuje soubor .gramps. Czech/Slovak genealogy, family tree, parish registers, archives, Gramps XML.
+license: MIT (LICENSE; nástroje ve scripts/archivy/ MIT – LICENSE-rodokmen-skill)
 compatibility: Shell s Pythonem 3 a přístupem k internetu (archivní portály, Mapy.com API). Volitelně ImageMagick (náhledy, slepení dlaždic), xmllint (validace .gramps) a prohlížeč pro portály bez nástroje. Orchestrace subagentů je navržená pro Claude Code.
 metadata:
   author: midlan

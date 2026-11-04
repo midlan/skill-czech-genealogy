@@ -77,6 +77,10 @@ agents/
 
 Skill obsahuje praktické postupy, nikoli právní radu. Ceníky, provoz badatelen a podmínky archivů se mohou měnit – ověřujte je na webech příslušných institucí. Kopie archiválií slouží obvykle jen ke studijním účelům; řiďte se podmínkami jednotlivých archivů.
 
+## Licence
+
+[MIT](LICENSE) © 2026 Milan Davídek. Nástroje ve složce `skills/czech-genealogy/scripts/archivy/` jsou také pod MIT, © Jindřich Šaršon (viz níže).
+
 ## Poděkování
 
 Nástroje ve složce `skills/czech-genealogy/scripts/archivy/` pocházejí z projektu [rodokmen-skill](https://github.com/sarsonj/rodokmen-skill) Jindřicha Šaršona (licence MIT, text v `scripts/archivy/LICENSE-rodokmen-skill`). Opravy nástrojů prosím hlaste přednostně tam.
