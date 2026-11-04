@@ -15,7 +15,12 @@ Skill pro [Claude](https://claude.ai), který pomáhá s **genealogickým výzku
 - **Souřadnice domů:** skript pro Mapy.com API dohledá souřadnice podle čísla popisného a ohlídá záměnu s čísly orientačními a místními částmi (API klíč zdarma na [developer.mapy.com](https://developer.mapy.com/account/projects)).
 - **Gramps:** doplňování nových údajů do exportu ve formátu Gramps XML (`.gramps`) s citacemi zdrojů, validace proti DTD, rodné a vdané jméno, osvojení, nemanželské děti.
 
+Skill dodržuje otevřený formát [Agent Skills](https://agentskills.io) (`SKILL.md` s frontmatter, podrobnosti v `references/`, skripty v `scripts/`), takže ho lze použít i v jiných nástrojích než Claude.
+
 ## Instalace
+
+### Jiné nástroje (Codex CLI, Gemini CLI…)
+Zkopírujte (nebo nalinkujte) složku `skills/czech-genealogy` do složky skillů svého nástroje, např. `~/.codex/skills/czech-genealogy` nebo `~/.gemini/skills/czech-genealogy`, případně podle dokumentace nástroje. Pro čtecí subagenty dejte subagentovi jako instrukce soubor `references/archive-reader.md`.
 
 ### Claude (claude.ai, desktop)
 1. Stáhněte složku [`skills/czech-genealogy`](skills/czech-genealogy) (nebo celý repozitář jako ZIP).
@@ -23,11 +28,12 @@ Skill pro [Claude](https://claude.ai), který pomáhá s **genealogickým výzku
 3. V nastavení Claude v sekci se skilly nahrajte ZIP jako nový skill.
 
 ### Claude Code
-Zkopírujte skill a čtecího agenta:
+Zkopírujte skill a čtecího agenta (stejný příkaz slouží i k aktualizaci – starou verzi skillu nejdřív smaže):
 
 ```bash
 tmp=$(mktemp -d) && git -C "$tmp" clone https://github.com/midlan/czech-genealogy.git \
   && src=$(echo "$tmp"/*) \
+  && rm -rf ~/.claude/skills/czech-genealogy \
   && mkdir -p ~/.claude/skills && cp -r "$src/skills/czech-genealogy" ~/.claude/skills/ \
   && mkdir -p ~/.claude/agents && cp "$src/agents/archive-reader.md" ~/.claude/agents/ \
   && rm -rf "$tmp"
@@ -51,14 +57,20 @@ Stačí začít mluvit o rodokmenu, matrikách nebo předcích, např.:
 ```
 skills/
 └── czech-genealogy/
-    ├── SKILL.md          # skill pro hlavního agenta
-    ├── references/
-    │   └── farnosti.md   # ověřená přiřazení obcí k farnostem a knihám
+    ├── SKILL.md                    # hlavní instrukce (načítají se celé)
+    ├── references/                 # podrobnosti, načítají se podle potřeby
+    │   ├── matriky-a-archivy.md    # právo, žádosti, přehled archivů, VÚA
+    │   ├── nastroje-archivy.md     # nástroje pro archivy bez prohlížeče
+    │   ├── farnosti.md             # ověřená přiřazení obcí k farnostem a knihám
+    │   ├── cteni-zapisu.md         # čtení zápisů, typické chyby
+    │   ├── orchestrace.md          # hlavní agent + čtecí subagenti, šablona zadání
+    │   ├── archive-reader.md       # instrukce pro čtecího agenta
+    │   └── gramps.md               # údržba rodokmenu v Gramps
     └── scripts/
         ├── souradnice_mapy.py  # souřadnice domů podle čp. přes Mapy.com API
         └── archivy/            # nástroje pro archivy bez prohlížeče (z sarsonj/rodokmen-skill, MIT)
 agents/
-└── archive-reader.md     # čtecí subagent (Sonnet) pro procházení archivů
+└── archive-reader.md     # definice subagenta pro Claude Code (Sonnet), instrukce čte z references/archive-reader.md
 ```
 
 ## Upozornění
