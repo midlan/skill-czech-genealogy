@@ -6,7 +6,7 @@ compatibility: Shell s Pythonem 3 a přístupem k internetu (archivní portály,
 metadata:
   author: midlan
   version: "2.0"
-  repository: https://github.com/midlan/czech-genealogy
+  repository: https://github.com/midlan/skill-czech-genealogy
 ---
 
 # Česká genealogie: matriky, archivy, Gramps

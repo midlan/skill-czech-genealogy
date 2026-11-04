@@ -31,7 +31,7 @@ Zkopírujte (nebo nalinkujte) složku `skills/czech-genealogy` do složky skill�
 Zkopírujte skill a čtecího agenta (stejný příkaz slouží i k aktualizaci – starou verzi skillu nejdřív smaže):
 
 ```bash
-tmp=$(mktemp -d) && git -C "$tmp" clone https://github.com/midlan/czech-genealogy.git \
+tmp=$(mktemp -d) && git -C "$tmp" clone https://github.com/midlan/skill-czech-genealogy.git \
   && src=$(echo "$tmp"/*) \
   && rm -rf ~/.claude/skills/czech-genealogy \
   && mkdir -p ~/.claude/skills && cp -r "$src/skills/czech-genealogy" ~/.claude/skills/ \
