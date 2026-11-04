@@ -1,4 +1,4 @@
-# czech-genealogy
+# skill-czech-genealogy
 
 Skill pro [Claude](https://claude.ai), který pomáhá s **genealogickým výzkumem v českých a slovenských matrikách a archivech** a s údržbou rodokmenu v programu [Gramps](https://gramps-project.org).
 
