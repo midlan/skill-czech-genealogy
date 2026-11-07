@@ -2,11 +2,11 @@
 
 Kdy číst: před hledáním v digitalizovaných matrikách a před zadáním úlohy čtecímu agentovi.
 
-Nástroje ve složce `scripts/archivy/` (převzaté z projektu sarsonj/rodokmen-skill, licence MIT) hledají knihy a stahují originály snímků přímo z portálů – **bez Chromu a bez přihlášení**. Spouštěj je z pracovní složky rodokmenu (tam vzniká mezipaměť `pracovni/.cache_*`): `python -I <cesta ke skillu>/scripts/archivy/<nástroj> …`, na Windows `python -I -X utf8 …`. Nápověda = nástroj bez parametrů. Náhled, výřez a slepení dlaždic potřebují **ImageMagick** (`magick`; Windows `winget install ImageMagick.ImageMagick`); stažení celého snímku z eBadatelny ho nepotřebuje.
+Nástroje ve složce `scripts/archivy/` (převzaté z projektu sarsonj/rodokmen-skill, licence MIT) hledají knihy a stahují originály snímků přímo z portálů – **bez Chromu a bez přihlášení**. Spouštěj je z pracovní složky rodokmenu (tam vzniká mezipaměť `pracovni/.cache_*`): `python -I <cesta ke skillu>/scripts/archivy/<nástroj> …`, na Windows `python -I -X utf8 …`. Nápověda = nástroj bez parametrů. Náhled, výřez a slepení dlaždic potřebují **ImageMagick** (`magick`; Windows `winget install ImageMagick.ImageMagick`); **eBadatelna SOA Praha se nástrojem procházet nesmí** (viz tabulka).
 
 | Archiv | Nástroj | Poznámky |
 |---|---|---|
-| SOA Praha – eBadatelna | `ebadatelna.py hledat "Obec"` → `matriky "Obec"` (matrikaId, kniha, druh, roky, fara, snímky) → `info <matrikaId>` (obsah, rozvržení stran po vesnicích) → `snimek <matrikaId> <snímek> <soubor.jpg> [nahled] [x0,y0,x1,y1]`; `link` = trvalý odkaz | Celý originál jedním požadavkem. Archiválie (urbáře, gruntovní knihy): `a-info`, `a-snimek` (id z adresy `…/archivalieId/<id>`). Údržba denně kolem 4:44. |
+| SOA Praha – eBadatelna | **jen prohlížeč** – viz níže | Od 11/2026 robots.txt zakazuje roboty (cesty `/d/` a `/a/`, výslovně i agenty nástroje) a server nástroji vrací 403; upstream nástroj vypnul. `ebadatelna.py`, `curl` ani přímé adresy obrázků (`/wicket/resource/…`) nepoužívej. |
 | SOA Třeboň – DigiArchiv | `trebon.py misto "Obec"` (**zkontroluj vypsaný název a okres**) → `svazky <id>` → `rejstrik <id_knihy> <písmeno>` (dobrovolnický jmenný rejstřík, ne u všech knih) → `snimek <id_knihy> <snímek> <soubor.jpg>` | Bez přihlášení; snímek slepí z dlaždic (ImageMagick). Prázdný rejstřík = rejstřík chybí, ne „osoba tam není“. |
 | SOA Plzeň – Porta fontium | `portafontium.py fara <fara>` → `info <kniha>` (u knih po vesnicích folia obcí) → `snimek <kniha> <snímek> <soubor.jpg>` | Obec → fara nástroj nehledá (stránka `portafontium.eu/searching/register?search_api_views_fulltext_1=<obec>`). Snímek ≈ folio. |
 | SOA Zámrsk – ARON | `aron_search.py "Obec[,Fara]"` → `aron_img.py <apu_id> info` → `aron_img.py <apu_id> <snímek> 0 <soubor.jpg>` (0 = plné rozlišení, 1 = poloviční na orientaci) | Stejnojmenné obce zužuj čárkou („Vinice,Hořice“). |
@@ -22,4 +22,11 @@ Pravidla pro nástroje:
 - Originál ukládej pod názvem podle pravidel médií (viz [gramps.md](gramps.md) → Média) rovnou do složky snímků; výřezy na čtení dávej do pracovní složky (`pracovni/`), originál neupravuj.
 - Podpříkaz `svazek` zapisuje do `data/svazky.json` v pracovní složce (formát projektu rodokmen-skill) – v tomto workflow ho nepotřebuješ, citace patří do Gramps.
 - Když nástroj selže kvůli změně portálu, popiš chybu, přepni na prohlížeč (viz [archive-reader.md](archive-reader.md)) a navrhni uživateli nahlásit problém v upstreamu.
-- **Prohlížeč (Chrome)** je jen záložní cesta: Litoměřice/Opava (najít knihu), MZA Brno – Acta Publica, FamilySearch, MyHeritage a portály bez nástroje.
+- **Prohlížeč (Chrome)** je jen záložní cesta: Litoměřice/Opava (najít knihu), MZA Brno – Acta Publica, FamilySearch, MyHeritage a portály bez nástroje. **Výjimka: eBadatelna SOA Praha jde jen přes prohlížeč.**
+
+## eBadatelna SOA Praha v prohlížeči
+- Uživatel je přihlášen ve svém Chromu (`claude --chrome` / `/chrome`); čtecí agent (Sonnet) pracuje ve vlastní záložce, paralelně nanejvýš 1–2 (sdílený prohlížeč).
+- Hledání: `https://ebadatelna.soapraha.cz/pages/SearchMatrikaPage?121`, režim „v lokalitách“ → napsat obec → kliknout na návrh → Vyhledat; tabulku číst textem stránky. ID knihy z odkazu `/pages/MatrikaPage/matrikaId/<ID>`; popis knihy uvádí lokality a u knih po vesnicích i oddíly.
+- Snímek: `/d/<ID>/<snímek>`, po načtení počkat 2–3 s. Zoom tlačítky −/+ ve spodní liště (po 5 %), „Držet přiblížení / pozici“ přenáší nastavení mezi snímky, posun tažením (kolečko mění zoom). Orientace (hlavičky, rok, měsíc) při 25–40 %, jména čitelná od ~70 % a teprve pak výřez (zoom akce) – výřez obrazovky originál nezvětší.
+- **Snímky se neukládají** jako originál (tlačítko stažení ani přímé adresy nepoužívat): nález se doloží výřezy obrazovky (`save_to_disk`), které **hlavní agent vždy přečte sám**; v citaci uveď URL snímku a „čteno v prohlížeči, snímek neuložen“. Médium do Gramps nevzniká.
+- Úskalí: záložka občas zamrzne (timeout screenshotu) – zavřít a otevřít novou; když timeoutují všechny záložky (např. po pádu CLI), je okno Chromu minimalizované/skryté – požádej uživatele, ať ho přenese do popředí. Stránku „Náhledy“ neotvírej (zamrzá). Rejstříky bývají společné N/O/Z s vlastním foliováním a mohou mít chybný rok – vždy dohledat zápis v knize.

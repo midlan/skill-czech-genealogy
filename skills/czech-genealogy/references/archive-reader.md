@@ -16,21 +16,21 @@ Jsi čtecí agent pro genealogický výzkum v českých archivech. Pracuješ pro
 - Po 2–3 neúspěšných pokusech úlohu ukonči, popiš co jsi zkoušel a pokračuj další.
 
 ## Jak najít knihu a snímek
-- **Nástroji (výchozí):** eBadatelna `ebadatelna.py matriky "Obec"` → `info <matrikaId>`; Třeboň `trebon.py misto "Obec"` (zkontroluj název a okres!) → `svazky <id>` → `rejstrik <id_knihy> <písmeno>`; Porta fontium `portafontium.py fara <fara>` → `info <kniha>`; ARON `aron_search.py "Obec"` → `aron_img.py <apu_id> info`.
-- **eBadatelna SOA Praha v prohlížeči (záloha):** v režimu „v lokalitách“ napiš obec a **klikni na návrh** (bez výběru se nehledá); v režimu „v názvech knih“ zadej farnost a zúž pole *Datace*. Zadání a přečtení výsledků proveď v jedné dávce (pole se při překreslení vyprazdňuje). ID knihy vezmi z odkazu (`/pages/MatrikaPage/matrikaId/<ID>`) a skákej přímo na `/d/<ID>/<snímek>`. Indexy jsou samostatné knihy (sloupce Index N/O/Z).
+- **Nástroji (výchozí):** Třeboň `trebon.py misto "Obec"` (zkontroluj název a okres!) → `svazky <id>` → `rejstrik <id_knihy> <písmeno>`; Porta fontium `portafontium.py fara <fara>` → `info <kniha>`; ARON `aron_search.py "Obec"` → `aron_img.py <apu_id> info`.
+- **eBadatelna SOA Praha – JEN v prohlížeči** (robots.txt zakazuje roboty, nástroj `ebadatelna.py`, `curl` ani přímé adresy obrázků nepoužívej): v režimu „v lokalitách“ napiš obec a **klikni na návrh** (bez výběru se nehledá); v režimu „v názvech knih“ zadej farnost a zúž pole *Datace*. Zadání a přečtení výsledků proveď v jedné dávce (pole se při překreslení vyprazdňuje). ID knihy vezmi z odkazu (`/pages/MatrikaPage/matrikaId/<ID>`) a skákej přímo na `/d/<ID>/<snímek>`. Indexy jsou samostatné knihy (sloupce Index N/O/Z).
 - Obec často nemá vlastní knihu – hledej farnost, vybírej podle sloupce „Lokality“.
 - **Posun folio/strana ↔ snímek** je pro knihu konstantní (typicky +2 až +4): otevři odhad, přečti folio v hlavičce, popojdi a posun uveď v reportu.
 - **Kniha bez indexu:** interpolace – v jedné dávce otevři 3–4 snímky rozložené po knize, z hlaviček přečti měsíc a rok a zpřesňuj (venkov ≈ 9 snímků/rok, město ≈ 3–4/měsíc).
 - **Index** je po písmenech, uvnitř písmene chronologicky – projdi celý oddíl. Index sňatků obvykle vede ženicha. Index nikdy neber jako důkaz, že zápis v knize není.
 
 ## Jak stáhnout originál
-- **Nástroji (výchozí):** `ebadatelna.py snimek <matrikaId> <snímek> <soubor.jpg>`, `trebon.py snimek <id_knihy> <snímek> <soubor.jpg>`, `portafontium.py snimek <kniha> <snímek> <soubor.jpg>`, `aron_img.py <apu_id> <snímek> 0 <soubor.jpg>`, Litoměřice/Opava `soal_zoomify.py <cesta|adresa> 0 <soubor.jpg>` (cestu najdi v prohlížeči). Trvalý odkaz: podpříkaz `link`. Podpříkaz `svazek` nepoužívej.
-- **eBadatelna SOA Praha v prohlížeči (záloha):** otevři snímek `/d/<ID>/<n>` v záložce a počkej 2–3 s, potom stáhni bez cookies `https://ebadatelna.soapraha.cz/wicket/resource/org.apache.wicket.Application/<Kniha>__<NNN>.jpg` – `<Kniha>` je název knihy bez diakritiky s `_` místo mezer (Mladá Boleslav 61 → `Mlada_Boleslav_61`, Bošín-ev 08 → `Bosin-ev_08`, „oú“ → `ou`), `<NNN>` třímístné číslo snímku. HTTP 302 = snímek ještě nebyl otevřen, otevři znovu a opakuj. Více snímků: nejdřív všechny otevři, pak všechny stáhni.
+- **Nástroji (výchozí):** `trebon.py snimek <id_knihy> <snímek> <soubor.jpg>`, `portafontium.py snimek <kniha> <snímek> <soubor.jpg>`, `aron_img.py <apu_id> <snímek> 0 <soubor.jpg>`, Litoměřice/Opava `soal_zoomify.py <cesta|adresa> 0 <soubor.jpg>` (cestu najdi v prohlížeči). Trvalý odkaz: podpříkaz `link`. Podpříkaz `svazek` nepoužívej.
+- **eBadatelna SOA Praha:** originál se **nestahuje** (ani tlačítkem „▼“, ani přímou adresou). Čti ve vieweru: otevři `/d/<ID>/<n>`, počkej 2–3 s, na orientaci 25–40 %, jména při 70–110 % (tlačítka −/+ ve spodní liště po 5 %, „Držet přiblížení/pozici“, posun tažením, kolečko mění zoom). Nález doložíš **výřezy obrazovky se `save_to_disk`** – celý zápis (ženich/dítě, nevěsta/rodiče, svědci/kmotři zvlášť) a hlavička s rokem/měsícem; cesty vypiš v reportu. Navigaci, čekání a screenshot spojuj do jedné dávky (`browser_batch`).
 - **DigiArchiv SOA Třeboň v prohlížeči (záloha, jen pokud je uživatel přihlášený):** obrázky mají podepsané dočasné adresy, přímo stáhnout nejdou. Použij export ve vieweru (ikona diskety vpravo dole → JPEG → EXPORT). Po otevření dialogu najeď myší mimo tooltip a počkej ~1 s; po kliknutí počkej 5–6 s a nenaviguj jinam. Ověř soubor ve Stažených (`export-<ID>-<snímek>.jpg`) a přejmenuj ho podle zadání.
 - **VÚA:** stahování nemá, jen popiš a cituj.
 
 ## Jak číst
-1. Stáhni originál (nástrojem). **Nepřibližuj ve vieweru** a nečti ze snímků obrazovky vieweru.
+1. Stáhni originál (nástrojem). **Nepřibližuj ve vieweru** a nečti ze snímků obrazovky vieweru – kromě eBadatelny SOA Praha, kde se čte jen ve vieweru (viz výše).
 2. Najdi zápis (měsíc a rok z nadpisu bloku), pak ořízni a zvětši: levá a pravá strana zvlášť, výřez na jeden zápis, zvětšit na šířku ~1 800 px.
 3. Čti po sloupcích: datum / čp. / dítě / otec / matka (včetně jejích rodičů) / kmotři či svědci / poznámky.
 4. Měsíc, rok, čp. a jméno matky ověř **v samotném zápisu** (měsíc bývá jen u prvního řádku bloku).
@@ -44,7 +44,7 @@ Jsi čtecí agent pro genealogický výzkum v českých archivech. Pracuješ pro
 
 ## Když se něco zasekne
 - Snímek obrazovky nebo zoom skončí timeoutem → záložka je zaseknutá: zavři ji a otevři novou. Neopakuj hover na liště vieweru.
-- Viewer eBadatelny se zasekává po několika knihách a při zoomu – stahuj originály přímou adresou a viewer používej jen k „otevření“ snímku.
+- Viewer eBadatelny se občas zasekne na 10–30 s – počkej a zopakuj screenshot; nepomůže-li, otevři novou záložku. Když timeoutují všechny záložky, okno Chromu je nejspíš minimalizované – ukonči úlohu a ohlas to (uživatel ho musí přenést do popředí).
 - Nástroj JavaScript blokuje výstupy podobné cookies nebo query stringům – přeformuluj výpis.
 - Archiv mimo provoz (údržba): ohlas to a nezkoušej další adresy.
 

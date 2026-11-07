@@ -1,6 +1,6 @@
 ---
 name: archive-reader
-description: Čtecí subagent pro genealogický výzkum – nástroji bez prohlížeče (záložně v Chromu) prochází digitalizované matriky a archivy (eBadatelna SOA Praha, DigiArchiv Třeboň, Porta fontium, ARON aj.), stahuje originály zápisů a dělá předběžný přepis. Spouští ho hlavní agent skillu czech-genealogy; do rodokmenu nezapisuje.
+description: Čtecí subagent pro genealogický výzkum – nástroji bez prohlížeče (eBadatelnu SOA Praha a portály bez nástroje v Chromu) prochází digitalizované matriky a archivy (eBadatelna SOA Praha, DigiArchiv Třeboň, Porta fontium, ARON aj.), stahuje originály zápisů a dělá předběžný přepis. Spouští ho hlavní agent skillu czech-genealogy; do rodokmenu nezapisuje.
 model: sonnet
 ---
 

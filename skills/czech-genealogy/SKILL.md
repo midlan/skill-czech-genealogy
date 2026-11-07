@@ -2,7 +2,7 @@
 name: czech-genealogy
 description: Genealogický výzkum v českých a slovenských pramenech a údržba rodokmenu v Gramps. Použij, když uživatel hledá předky, sestavuje rodokmen, potřebuje žádost na matriku (doslovný výpis), hledá v digitalizovaných matrikách (eBadatelna SOA Praha, SOA Třeboň, Porta fontium, ARON, Litoměřice, Opava), čte matriční zápis, legionářskou kartu VÚA nebo upravuje soubor .gramps. Czech/Slovak genealogy, family tree, parish registers, archives, Gramps XML.
 license: MIT (LICENSE; nástroje ve scripts/archivy/ MIT – LICENSE-rodokmen-skill)
-compatibility: Shell s Pythonem 3 a přístupem k internetu (archivní portály, Mapy.com API). Volitelně ImageMagick (náhledy, slepení dlaždic), xmllint (validace .gramps) a prohlížeč pro portály bez nástroje. Orchestrace subagentů je navržená pro Claude Code.
+compatibility: Shell s Pythonem 3 a přístupem k internetu (archivní portály, Mapy.com API). Volitelně ImageMagick (náhledy, slepení dlaždic), lxml (validace .gramps skriptem scripts/gramps/gramps_validate.py) a prohlížeč pro portály bez nástroje. Orchestrace subagentů je navržená pro Claude Code.
 metadata:
   author: midlan
   version: "2.0"
@@ -37,7 +37,7 @@ Skripty: `scripts/archivy/` (portály archivů, převzato z sarsonj/rodokmen-ski
 
 ## Pracovní postup
 1. Ze známých údajů urči další krok: nejdřív **narození** osoby (uvede rodiče, prarodiče, často datum sňatku rodičů), pak **sňatek rodičů** (uvede data narození a rodiče snoubenců). Co je ještě na matrice (lhůty 100/75 let), řeš žádostí – viz matriky-a-archivy.md.
-2. Hledání v digitalizovaných matrikách proveď nástroji ze `scripts/archivy/`, ideálně přes **čtecí subagenty** (orchestrace.md). Prohlížeč jen jako záloha. Když nemáš shell ani subagenty (např. chat), připrav uživateli prompt pro agenta podle šablony v orchestrace.md.
+2. Hledání v digitalizovaných matrikách proveď nástroji ze `scripts/archivy/`, ideálně přes **čtecí subagenty** (orchestrace.md). Prohlížeč jen jako záloha – kromě eBadatelny SOA Praha, která jde jen přes prohlížeč (nastroje-archivy.md). Když nemáš shell ani subagenty (např. chat), připrav uživateli prompt pro agenta podle šablony v orchestrace.md.
 3. **Validuj každý obrázek sám:** přečti originál, porovnej s přepisem čtecího agenta, oprav chyby (časté: povolání, jména obcí, svědci, roky a měsíce v poznámkách) a výslovně je uživateli uveď. Negativní nález platí jen pro skutečně přečtený rozsah.
 4. Doplň do rodokmenu podle gramps.md – vždy jako **novou verzi souboru** (`_v2`, `_v3`…), vstup nikdy nepřepisuj; validuj proti DTD a zkontroluj duplicitní handle a neplatné odkazy.
 5. Nové ověřené přiřazení obce k farnosti/knize doplň do farnosti.md (nebo ho navrhni správci skillu).
