@@ -9,7 +9,8 @@ Obec často nemá vlastní knihu – hledej farnost a v tabulce knih sloupec „
 | Radošovice | Radošovice 05 (narození, 1850. léta), 12 (narození 1880. léta), 13 (sňatky) | |
 | Rataje (okres Benešov) | Zdislavice | podle lokalit v eBadatelně; v matrice Radošovice 12 (1883) zapsáno jako „Ovesné Rataje“ – ztotožnění pravděpodobné, ne ověřené. (Dřívější údaj „Vlašim 23“ byl chybný.) |
 | Ostrov (u Veliše) | Veliš | podle eBadatelny se zde oddávaly nevěsty z Ostrova |
-| Brodce | Horky nad Jizerou – Horky 13 (narození 1859–1869), Horky 22 (sňatky 1875–1901) | |
+| Brodce | Horky nad Jizerou – Horky 06 (narození 1739–1769, bez rejstříku), Horky 14 (sňatky 1739–1789, bez rejstříku), Horky 13 (narození 1859–1869), Horky 22 (sňatky 1875–1901) | v 18. století zápisy s nadpisem obce; farář psán „brodecký“ |
+| Dobrovice (městečko) | Dobrovice – Dobrovice 03 (narození 1744–1787), 07 (sňatky 1744–1788), 08 (sňatky 1789–1817, po obcích); rejstříky Dobrovice 27 (N/O 1744–1795), 28 (N/O/Z 1796–1850) | rejstříky mohou mít chybný rok i folio ±2 |
 | Sloveč | Králův Městec – Městec Králové 20/21 (narození Sloveč 1839–1902), 25 (sňatky Sloveč + Střihov) | |
 | Vinice (u Králova Městce) | Králův Městec – Městec Králové 40 (sňatky jen Vinice 1877–1949) | |
 | Mečíř | Bošín – katolická narození online jen do 1862 (Bošín 02, 06); sňatky Bošín 15 (Mečíř 1866–1949); evangelíci Bošín-ev 08 | |
